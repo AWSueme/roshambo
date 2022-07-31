@@ -1,42 +1,53 @@
 let wins =0;
 let losses =0;
+let winscore=document.querySelector("#wins");
+let losescore=document.querySelector("#losses");
+let outcome=document.querySelector("#outcome");
+let rock=document.querySelector("#rock");
+let paper=document.querySelector("#paper");
+let scissors=document.querySelector("#scissors");
 
-while(wins<3&&losses<3){
-
-let input = prompt("Rock Paper Scissors!");
-
-referee(input, opponentchoice());
 
 
+//let input = prompt("Rock Paper Scissors!");
 
-console.log("Wins: " + wins + "     Losses: " + losses);
+//referee(input, opponentchoice());
 
+rock.addEventListener('click', throwrock);
+scissors.addEventListener('click', throwscissors);
+paper.addEventListener("click", throwpaper);
+
+
+function throwrock(){
+    referee("rock");
 }
 
-if(wins>2){
-    console.log("Outstanding Victory!");
+function throwscissors(){
+    referee("scissors");
 }
 
-if(losses>2){
-    console.log("This is why your parents got a divorce...");
+function throwpaper(){
+    referee("paper");
 }
 
 
 
-function referee(playerchoice, compchoice){
+function referee(playerchoice){
+
+    let compchoice=opponentchoice();
 
     switch(playerchoice){
         case "rock":
             switch(compchoice){
                 case "rock":
-                    console.log("Tie");
+                    outcome.textContent="Tie";
                     break;
                 case "paper":
-                    console.log("Lose");
+                    outcome.textContent="Lose";
                     losses++;
                     break;
                 case "scissors":
-                    console.log("Win");
+                    outcome.textContent="Win";
                     wins++;
                     break;
             }
@@ -44,14 +55,14 @@ function referee(playerchoice, compchoice){
         case "paper":
             switch(compchoice){
                 case "rock":
-                    console.log("Win");
+                    outcome.textContent="Win";
                     wins++;
                     break;
                 case "paper":
-                    console.log("Tie");
+                    outcome.textContent="Tie";
                     break;
                 case "scissors":
-                    console.log("Lose");
+                    outcome.textContent="Lose";
                     losses++;
                     break;
             }
@@ -59,22 +70,38 @@ function referee(playerchoice, compchoice){
         case "scissors":
             switch(compchoice){
                 case "rock":
-                    console.log("Lose");
+                    outcome.textContent="Lose";
                     losses++;
                     break;
                 case "paper":
-                    console.log("Win");
+                    outcome.textContent="Win";
                     wins++;
                     break;
                 case "scissors":
-                    console.log("Tie");
+                    outcome.textContent="Tie";
                     break;
             }
             break;
         default:
             console.log("Please enter rock, paper, or scissors");
+            
     }
 
+    
+    winscore.textContent="wins: " + wins;
+    losescore.textContent="losses: " + losses;
+
+
+
+    if(wins>2){
+        outcome.textContent="Outstanding Victory!";
+    }
+
+    if(losses>2){
+        outcome.textContent="This is why your parents got a divorce...";
+    }
+
+    console.log("yo");
 }
 
 function opponentchoice(){
